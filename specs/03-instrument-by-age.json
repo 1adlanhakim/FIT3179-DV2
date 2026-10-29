@@ -1,0 +1,133 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Instrument participation by age group with national reference line.",
+  "width": "container",
+  "height": 270,
+  "data": {
+    "url": "data/gss_instrument_by_age_2025.csv"
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "stroke": "#b9b3ac",
+        "strokeDash": [
+          4,
+          4
+        ]
+      },
+      "encoding": {
+        "x": {
+          "datum": 6.1,
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "size": 180,
+        "color": "#c86647",
+        "stroke": "#fffdf9",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "x": {
+          "field": "percentage",
+          "type": "quantitative",
+          "title": "Participation (%)",
+          "scale": {
+            "domain": [
+              0,
+              9
+            ],
+            "zero": true
+          }
+        },
+        "y": {
+          "field": "age_group",
+          "type": "ordinal",
+          "sort": [
+            "15-24",
+            "25-34",
+            "35-44",
+            "45-54",
+            "55-64",
+            "65+"
+          ],
+          "title": null
+        },
+        "tooltip": [
+          {
+            "field": "age_group",
+            "type": "nominal",
+            "title": "Age group"
+          },
+          {
+            "field": "percentage",
+            "type": "quantitative",
+            "title": "Participation (%)",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 10,
+        "fontWeight": 600,
+        "fontSize": 11,
+        "color": "#27313f"
+      },
+      "encoding": {
+        "x": {
+          "field": "percentage",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "age_group",
+          "type": "ordinal",
+          "sort": [
+            "15-24",
+            "25-34",
+            "35-44",
+            "45-54",
+            "55-64",
+            "65+"
+          ]
+        },
+        "text": {
+          "field": "percentage",
+          "type": "quantitative",
+          "format": ".1f"
+        }
+      }
+    }
+  ],
+  "config": {
+    "font": "Inter, Arial, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#556170",
+      "titleColor": "#27313f",
+      "gridColor": "#eee9e2",
+      "domainColor": "#c9c2b9",
+      "tickColor": "#c9c2b9",
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 600
+    },
+    "legend": {
+      "labelColor": "#4b5563",
+      "titleColor": "#27313f",
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 600,
+      "symbolStrokeWidth": 1.5
+    }
+  }
+}

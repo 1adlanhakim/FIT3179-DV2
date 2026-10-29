@@ -1,0 +1,214 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Treemap of AMEB NSW practical music examination formats, 2024–25.",
+
+  "width": 1040,
+  "height": 340,
+  "padding": 0,
+  "autosize": "none",
+
+  "data": [
+    {
+      "name": "tree",
+      "values": [
+        {
+          "id": "Practical music examinations",
+          "parent": null,
+          "value": 0
+        },
+        {
+          "id": "Repertoire",
+          "parent": "Practical music examinations",
+          "value": 11016
+        },
+        {
+          "id": "Comprehensive",
+          "parent": "Practical music examinations",
+          "value": 8860
+        },
+        {
+          "id": "Leisure",
+          "parent": "Practical music examinations",
+          "value": 5527
+        }
+      ]
+    },
+    {
+      "name": "treeLayout",
+      "source": "tree",
+      "transform": [
+        {
+          "type": "stratify",
+          "key": "id",
+          "parentKey": "parent"
+        },
+        {
+          "type": "treemap",
+          "field": "value",
+          "sort": {
+            "field": "value",
+            "order": "descending"
+          },
+          "round": true,
+          "method": "squarify",
+          "ratio": 1.6,
+          "size": [
+            {
+              "signal": "width"
+            },
+            {
+              "signal": "height"
+            }
+          ],
+          "paddingInner": 5,
+          "paddingOuter": 0
+        }
+      ]
+    },
+    {
+      "name": "leaves",
+      "source": "treeLayout",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.depth > 0"
+        }
+      ]
+    }
+  ],
+
+  "scales": [
+    {
+      "name": "color",
+      "type": "ordinal",
+      "domain": [
+        "Repertoire",
+        "Comprehensive",
+        "Leisure"
+      ],
+      "range": [
+        "#92264a",
+        "#117a7a",
+        "#d7a72c"
+      ]
+    }
+  ],
+
+  "marks": [
+    {
+      "type": "rect",
+      "from": {
+        "data": "leaves"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "field": "x0"
+          },
+          "y": {
+            "field": "y0"
+          },
+          "x2": {
+            "field": "x1"
+          },
+          "y2": {
+            "field": "y1"
+          },
+          "fill": {
+            "scale": "color",
+            "field": "id"
+          },
+          "stroke": {
+            "value": "#fffdf9"
+          },
+          "strokeWidth": {
+            "value": 3
+          },
+          "tooltip": {
+            "signal": "datum.id + ': ' + format(datum.value, ',') + ' exams'"
+          }
+        },
+        "update": {
+          "opacity": {
+            "value": 0.95
+          }
+        },
+        "hover": {
+          "opacity": {
+            "value": 1
+          }
+        }
+      }
+    },
+
+    {
+      "type": "text",
+      "from": {
+        "data": "leaves"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "datum.x0 + 16"
+          },
+          "y": {
+            "signal": "datum.y0 + 28"
+          },
+          "text": {
+            "field": "id"
+          },
+          "font": {
+            "value": "Inter"
+          },
+          "fontSize": {
+            "signal": "(datum.x1 - datum.x0) < 180 ? 14 : 18"
+          },
+          "fontWeight": {
+            "value": 700
+          },
+          "fill": {
+            "signal": "datum.id === 'Leisure' ? '#2b2926' : '#fffdf9'"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "limit": {
+            "signal": "max(60, datum.x1 - datum.x0 - 26)"
+          }
+        }
+      }
+    },
+
+    {
+      "type": "text",
+      "from": {
+        "data": "leaves"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "datum.x0 + 16"
+          },
+          "y": {
+            "signal": "datum.y0 + 56"
+          },
+          "text": {
+            "signal": "format(datum.value, ',') + ' exams'"
+          },
+          "font": {
+            "value": "Inter"
+          },
+          "fontSize": {
+            "value": 13
+          },
+          "fill": {
+            "signal": "datum.id === 'Leisure' ? '#2b2926' : '#fffdf9'"
+          },
+          "baseline": {
+            "value": "middle"
+          }
+        }
+      }
+    }
+  ]
+}
