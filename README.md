@@ -29,6 +29,7 @@ FIT3179-DV2/
 │   └── main.js
 └── specs/
     └── Vega / Vega-Lite chart specifications
+```
 
 ## Visualisation Features
 
