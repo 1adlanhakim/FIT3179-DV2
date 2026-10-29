@@ -1,24 +1,83 @@
-# FIT3179 Data Visualisation 2 — HD Refactor
+# FIT3179 Data Visualisation 2 — Musical Instruments
 
-**Title:** Who Gets to Play?
+## Who Gets to Play?
 
-A single-page Vega/Vega-Lite story about musical participation, learning and public access in Australia.
+An interactive data visualisation exploring musical participation, music learning, public access and examination activity across Australia.
 
-## Structure
-- `index.html` — final story page
-- `css/style.css` — layout, typography and responsive design
-- `js/main.js` — loads all 15 chart specs
-- `specs/` — 15 human-readable Vega/Vega-Lite specifications
-- `data/` — cleaned source extracts used by the charts
-- `docs/` — report draft, chart register, source validation and rubric checklist
+**Author:** Wan Adlan Hakim bin Wan Zalizan  
+**Student ID:** 35572140  
+**Unit:** FIT3179 Data Visualisation  
+**Institution:** Monash University Malaysia  
+**Semester:** Semester 2, 2026
 
-## Run locally
-Use VS Code Live Server or another local HTTP server. Do not open `index.html` directly from the file system because browsers may block local data loading.
+## Project Overview
 
-## Submission-oriented counts
-- 15 charts
-- 8 advanced idioms counted conservatively
-- 3 distinct map idioms
-- 4 major public data sources
+This visualisation investigates how participation in music differs across demographic groups, how earlier arts education relates to later creative participation, how access to publicly supported music education varies geographically, and how formal music examination activity is distributed.
 
-See `docs/rubric-checklist.md` before publishing.
+The project combines data from the Australian Bureau of Statistics, Creative Australia, the NSW Government and NESA / AMEB NSW.
+
+## Project Structure
+
+index.html
+css/
+    style.css
+js/
+    main.js
+data/
+    project datasets
+specs/
+    Vega and Vega-Lite visualisation specifications
+README.md
+
+## Visualisation Features
+
+The website includes interactive and static visualisations created with Vega and Vega-Lite, including:
+
+- a 100-unit participation chart
+- ranked bar charts
+- demographic comparisons
+- a dumbbell plot
+- a heatmap
+- an interactive bump chart
+- an interactive Australian choropleth map
+- NSW service-location and proportional-symbol maps
+- a grant-distribution box plot
+- a ranked grant comparison
+- examination trend and delivery charts
+- a treemap of practical examination formats
+
+Interactive features include tooltips, legend-based highlighting and a selectable measure on the Australian state and territory map.
+
+## Data Sources
+
+Primary sources include:
+
+- Australian Bureau of Statistics — General Social Survey 2025
+- Creative Australia — National Arts Participation Survey 2025
+- NSW Government — Regional Conservatorium Grants Program 2025/26–2027/28
+- NESA — Annual Report 2024–25, including AMEB NSW data
+
+Geographic boundaries and locality data are used to support the mapping components of the visualisation.
+
+## Running the Project
+
+The project should be viewed through a web server rather than by opening `index.html` directly from the local file system.
+
+For example, the project can be run using the **Live Server** extension in Visual Studio Code.
+
+## Technologies
+
+- HTML5
+- CSS3
+- JavaScript
+- Vega
+- Vega-Lite
+- Vega-Embed
+
+## AI Acknowledgement
+
+OpenAI ChatGPT was used to assist with refining academic narrative text and identifying technical limitations within Vega-Lite through an iterative development process. AI-generated suggestions were critically reviewed, factual claims were verified against the original data sources, and the final wording was independently revised for accuracy, clarity and alignment with academic standards.
+
+## Educational Use
+
+This project was created for FIT3179 Data Visualisation at Monash University Malaysia.
