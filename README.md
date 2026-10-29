@@ -18,13 +18,17 @@ The project combines data from the Australian Bureau of Statistics, Creative Aus
 
 ## Project Structure
 
+```text
 FIT3179-DV2/
 ├── index.html
 ├── README.md
 ├── css/
+│   └── style.css
 ├── data/
 ├── js/
+│   └── main.js
 └── specs/
+    └── Vega / Vega-Lite chart specifications
 
 ## Visualisation Features
 
