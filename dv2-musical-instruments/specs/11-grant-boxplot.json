@@ -1,0 +1,110 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Box plot with individual grant points for 17 regional conservatorium recipients.",
+  "width": "container",
+  "height": 155,
+  "data": {
+    "url": "data/conservatorium_grants_2025_26.csv"
+  },
+  "transform": [
+    {
+      "calculate": "'Approved grants'",
+      "as": "group"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "boxplot",
+        "extent": "min-max",
+        "size": 52,
+        "color": "#d7a72c",
+        "median": {
+          "color": "#3b352f",
+          "strokeWidth": 2
+        }
+      },
+      "encoding": {
+        "x": {
+          "field": "amount",
+          "type": "quantitative",
+          "title": "Approved grant ($)",
+          "axis": {
+            "format": "$~s"
+          },
+          "scale": {
+            "zero": false
+          }
+        },
+        "y": {
+          "field": "group",
+          "type": "nominal",
+          "axis": null
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "size": 58,
+        "color": "#92264a",
+        "opacity": 0.56,
+        "stroke": "#fffdf9",
+        "strokeWidth": 0.7
+      },
+      "encoding": {
+        "x": {
+          "field": "amount",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "group",
+          "type": "nominal",
+          "axis": null
+        },
+        "tooltip": [
+          {
+            "field": "recipient",
+            "type": "nominal",
+            "title": "Conservatorium"
+          },
+          {
+            "field": "city",
+            "type": "nominal",
+            "title": "Location"
+          },
+          {
+            "field": "amount",
+            "type": "quantitative",
+            "title": "Approved grant ($)",
+            "format": ",.0f"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "font": "Inter, Arial, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#556170",
+      "titleColor": "#27313f",
+      "gridColor": "#eee9e2",
+      "domainColor": "#c9c2b9",
+      "tickColor": "#c9c2b9",
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 600
+    },
+    "legend": {
+      "labelColor": "#4b5563",
+      "titleColor": "#27313f",
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 600,
+      "symbolStrokeWidth": 1.5
+    }
+  }
+}

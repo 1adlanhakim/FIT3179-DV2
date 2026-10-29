@@ -1,0 +1,133 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "100-unit chart showing the 6.1% of Australians aged 15+ who reported singing or playing a musical instrument in 2025.",
+
+  "width": "container",
+  "height": 255,
+
+  "data": {
+    "url": "data/instrument_waffle_6_1.csv"
+  },
+
+  "encoding": {
+    "x": {
+      "field": "col",
+      "type": "ordinal",
+      "axis": null
+    },
+    "y": {
+      "field": "row",
+      "type": "ordinal",
+      "sort": "descending",
+      "axis": null
+    }
+  },
+
+  "layer": [
+    {
+      "mark": {
+        "type": "square",
+        "size": 400,
+        "color": "#ece7e1"
+      }
+    },
+
+    {
+      "transform": [
+        {
+          "filter": "datum.status === 'full'"
+        }
+      ],
+      "mark": {
+        "type": "square",
+        "size": 340,
+        "color": "#92264a"
+      },
+      "encoding": {
+        "tooltip": [
+          {
+            "value": "6.1% reported singing or playing a musical instrument"
+          }
+        ]
+      }
+    },
+
+    {
+      "transform": [
+        {
+          "filter": "datum.status === 'partial'"
+        }
+      ],
+      "mark": {
+        "type": "square",
+        "size": 40,
+        "color": "#92264a"
+      },
+      "encoding": {
+        "tooltip": [
+          {
+            "value": "The smaller mark represents the additional 0.1%"
+          }
+        ]
+      }
+    },
+
+    {
+      "data": {
+        "values": [
+          {
+            "label": "6.1%"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "font": "Inter",
+        "fontSize": 16,
+        "fontWeight": 700,
+        "color": "#92264a",
+        "align": "center",
+        "baseline": "top"
+      },
+      "encoding": {
+        "x": {
+          "value": 33
+        },
+        "y": {
+          "value": 5
+        },
+        "text": {
+          "field": "label"
+        }
+      }
+    }
+  ],
+
+  "config": {
+    "font": "Inter, Arial, sans-serif",
+
+    "view": {
+      "stroke": null
+    },
+
+    "axis": {
+      "labelColor": "#556170",
+      "titleColor": "#27313f",
+      "gridColor": "#eee9e2",
+      "domainColor": "#c9c2b9",
+      "tickColor": "#c9c2b9",
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 600
+    },
+
+    "legend": {
+      "labelColor": "#4b5563",
+      "titleColor": "#27313f",
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 600,
+      "symbolStrokeWidth": 1.5
+    }
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Dumbbell chart comparing later participation for people taught and not taught an artform at school age.",
+  "width": "container",
+  "height": 225,
+  "data": {
+    "url": "data/education_exposure_2025.csv"
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "stroke": "#b9b3ac",
+        "strokeWidth": 3
+      },
+      "encoding": {
+        "x": {
+          "field": "percentage",
+          "type": "quantitative",
+          "title": "Participation (%)",
+          "scale": {
+            "domain": [
+              0,
+              55
+            ]
+          }
+        },
+        "y": {
+          "field": "outcome",
+          "type": "nominal",
+          "sort": [
+            "Create music",
+            "Any creative participation"
+          ],
+          "title": null
+        },
+        "detail": {
+          "field": "outcome"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "size": 190,
+        "stroke": "#fffdf9",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "x": {
+          "field": "percentage",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "outcome",
+          "type": "nominal",
+          "sort": [
+            "Create music",
+            "Any creative participation"
+          ]
+        },
+        "color": {
+          "field": "school_age_exposure",
+          "type": "nominal",
+          "title": "School-age arts education",
+          "scale": {
+            "domain": [
+              "Taught an artform",
+              "Not taught an artform"
+            ],
+            "range": [
+              "#92264a",
+              "#d7a72c"
+            ]
+          },
+          "legend": {
+            "orient": "top",
+            "direction": "horizontal"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "outcome",
+            "type": "nominal"
+          },
+          {
+            "field": "school_age_exposure",
+            "type": "nominal",
+            "title": "School-age experience"
+          },
+          {
+            "field": "percentage",
+            "type": "quantitative",
+            "title": "Participation (%)",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "dx": 9,
+        "align": "left",
+        "fontWeight": 600,
+        "fontSize": 11,
+        "color": "#27313f"
+      },
+      "encoding": {
+        "x": {
+          "field": "percentage",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "outcome",
+          "type": "nominal",
+          "sort": [
+            "Create music",
+            "Any creative participation"
+          ]
+        },
+        "text": {
+          "field": "percentage",
+          "type": "quantitative",
+          "format": ".1f"
+        }
+      }
+    }
+  ],
+  "config": {
+    "font": "Inter, Arial, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#556170",
+      "titleColor": "#27313f",
+      "gridColor": "#eee9e2",
+      "domainColor": "#c9c2b9",
+      "tickColor": "#c9c2b9",
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 600
+    },
+    "legend": {
+      "labelColor": "#4b5563",
+      "titleColor": "#27313f",
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 600,
+      "symbolStrokeWidth": 1.5
+    }
+  }
+}

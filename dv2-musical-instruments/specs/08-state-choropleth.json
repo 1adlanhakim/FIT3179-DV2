@@ -1,0 +1,147 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Interactive choropleth comparing music creation, live music attendance and music streaming across Australian states and territories in 2025.",
+
+  "width": "container",
+  "height": 520,
+
+  "params": [
+    {
+      "name": "Metric",
+      "value": "create_music",
+      "bind": {
+        "input": "select",
+        "options": [
+          "create_music",
+          "attend_music",
+          "stream_music"
+        ],
+        "labels": [
+          "Create music",
+          "Attend live music",
+          "Stream music"
+        ],
+        "name": "Show: "
+      }
+    }
+  ],
+
+  "data": {
+    "url": "data/states.geojson",
+    "format": {
+      "type": "json",
+      "property": "features"
+    }
+  },
+
+  "transform": [
+    {
+      "lookup": "properties.STATE_NAME",
+      "from": {
+        "data": {
+          "url": "data/state_music_2025.csv"
+        },
+        "key": "state_name",
+        "fields": [
+          "state",
+          "create_music",
+          "attend_music",
+          "stream_music"
+        ]
+      }
+    },
+    {
+      "calculate": "Metric === 'create_music' ? datum.create_music : Metric === 'attend_music' ? datum.attend_music : datum.stream_music",
+      "as": "selected_metric"
+    },
+    {
+      "filter": "isValid(datum.selected_metric)"
+    }
+  ],
+
+  "projection": {
+    "type": "conicEqualArea",
+    "parallels": [-18, -36],
+    "rotate": [-132, 0, 0],
+    "center": [0, -27]
+  },
+
+  "mark": {
+    "type": "geoshape",
+    "stroke": "#fffdf9",
+    "strokeWidth": 1.5
+  },
+
+  "encoding": {
+    "color": {
+      "field": "selected_metric",
+      "type": "quantitative",
+      "title": "Participation (%)",
+      "scale": {
+        "scheme": "reds"
+      },
+      "legend": {
+        "orient": "bottom",
+        "direction": "horizontal",
+        "gradientLength": 280
+      }
+    },
+
+    "tooltip": [
+      {
+        "field": "properties.STATE_NAME",
+        "type": "nominal",
+        "title": "State/Territory"
+      },
+      {
+        "field": "create_music",
+        "type": "quantitative",
+        "title": "Create music (%)",
+        "format": ".1f"
+      },
+      {
+        "field": "attend_music",
+        "type": "quantitative",
+        "title": "Attend live music (%)",
+        "format": ".1f"
+      },
+      {
+        "field": "stream_music",
+        "type": "quantitative",
+        "title": "Stream music (%)",
+        "format": ".1f"
+      },
+      {
+        "field": "selected_metric",
+        "type": "quantitative",
+        "title": "Selected measure (%)",
+        "format": ".1f"
+      }
+    ]
+  },
+
+  "config": {
+    "font": "Inter, Arial, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#556170",
+      "titleColor": "#27313f",
+      "gridColor": "#eee9e2",
+      "domainColor": "#c9c2b9",
+      "tickColor": "#c9c2b9",
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 600
+    },
+    "legend": {
+      "labelColor": "#4b5563",
+      "titleColor": "#27313f",
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 600,
+      "symbolStrokeWidth": 1.5
+    }
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Ranked comparison of selected creative activities in Australia, highlighting instrument participation.",
+  "width": "container",
+  "height": 355,
+
+  "data": {
+    "url": "data/gss_creative_activities_2025.csv"
+  },
+
+  "transform": [
+    {
+      "calculate": "datum.activity === 'Singing or playing a musical instrument' ? 'Instrument' : 'Other'",
+      "as": "focus"
+    }
+  ],
+
+  "mark": {
+    "type": "bar",
+    "cornerRadiusEnd": 3
+  },
+
+  "encoding": {
+    "y": {
+      "field": "activity",
+      "type": "nominal",
+      "sort": "-x",
+      "title": null,
+      "axis": {
+        "labelLimit": 270,
+        "labelFontSize": 11,
+        "labelExpr": "datum.label === 'Designing websites, computer games or interactive software' ? 'Websites, games & interactive software' : datum.label === 'Performed in drama, comedy, musical or variety performance' ? 'Drama, comedy, musical & variety' : datum.label"
+      }
+    },
+
+    "x": {
+      "field": "percentage",
+      "type": "quantitative",
+      "title": "Participation in previous 12 months (%)",
+      "scale": {
+        "domain": [0, 34],
+        "zero": true
+      },
+      "axis": {
+        "tickCount": 8
+      }
+    },
+
+    "color": {
+      "field": "focus",
+      "type": "nominal",
+      "scale": {
+        "domain": ["Instrument", "Other"],
+        "range": ["#92264a", "#c9c3bc"]
+      },
+      "legend": null
+    },
+
+    "tooltip": [
+      {
+        "field": "activity",
+        "type": "nominal",
+        "title": "Activity"
+      },
+      {
+        "field": "percentage",
+        "type": "quantitative",
+        "title": "Participation (%)",
+        "format": ".1f"
+      }
+    ]
+  },
+
+  "config": {
+    "font": "Inter, Arial, sans-serif",
+
+    "view": {
+      "stroke": null
+    },
+
+    "axis": {
+      "labelColor": "#556170",
+      "titleColor": "#27313f",
+      "gridColor": "#eee9e2",
+      "domainColor": "#c9c2b9",
+      "tickColor": "#c9c2b9",
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": 600
+    }
+  }
+}
